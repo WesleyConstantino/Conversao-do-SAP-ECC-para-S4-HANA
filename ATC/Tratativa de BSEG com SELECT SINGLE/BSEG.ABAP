@@ -8,7 +8,7 @@
 *           gjahr = itab_with_item-gjahr    AND
 *           hkont = itab_with_item-hkont.
 
-    DATA lt_bseg_aux TYPE TABLE OF bseg.
+    DATA lt_bseg TYPE TABLE OF bseg.
 
       CALL FUNCTION 'FAGL_GET_BSEG'
         EXPORTING
@@ -20,10 +20,10 @@
         EXCEPTIONS
           OTHERS  = 2.
 
-      READ TABLE lt_bseg_aux INTO DATA(ls_bseg_aux) INDEX 1.
+      READ TABLE lt_bseg INTO DATA(ls_bseg) INDEX 1.
 
       IF sy-subrc EQ 0.
-        v_gsber = ls_bseg_aux-gsber.
+        v_gsber = ls_bseg-gsber.
       ENDIF.
 
 

@@ -1,5 +1,5 @@
 *---> 06/07/2023 - Migração S4 - WS
-  SORT tw_saida BY posnr.
+  SORT tw_saida BY txt50 posnr.
 *<--- 06/07/2023 - Migração S4 - WS
 
  LOOP AT tw_saida INTO w_saida.

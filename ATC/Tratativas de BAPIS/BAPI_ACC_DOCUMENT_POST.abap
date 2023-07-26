@@ -31,5 +31,5 @@ IF es_cuenta_contable-tipo_movimiento = 'DB'.
           obj_sys        = obj_sys
         TABLES
           accountgl      = accountgl
-          currencyamount = currencyamount
+          currencyamount = currencyamount  "<- Parâmetro "currencyamount" da BAPI
           return         = return.

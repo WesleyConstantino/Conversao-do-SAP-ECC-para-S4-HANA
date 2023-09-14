@@ -1,3 +1,5 @@
+"Sempre fazer o SORT antes do loop. O  SORT é feito com a tabela do loop by campo do ON CHANGE OF.
+
 *---> 06/07/2023 - Migração S4 - WS
   SORT tw_saida BY txt50 posnr.
 *<--- 06/07/2023 - Migração S4 - WS

@@ -1,4 +1,4 @@
-"Sempre fazer o SORT antes do loop.
+"Sempre fazer o SORT antes do loop. O  SORT é feito com a tabela do loop by campo do ON CHANGE OF.
 
 *---> 06/07/2023 - Migração S4 - WS
   SORT tl_0013 BY seqnum.

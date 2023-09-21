@@ -1,30 +1,30 @@
-* ---> S4 Migration - 29/06/2023 - WS - Inicio
+* <--- S4 Migration - 20/09/2023 - WS
 
-*    SELECT SINGLE gsber
-*      INTO v_gsber
-*      FROM bseg
-*     WHERE bukrs = itab_with_item-bukrs    AND
-*           belnr = itab_with_item-belnr    AND
-*           gjahr = itab_with_item-gjahr    AND
-*           hkont = itab_with_item-hkont.
+*    SELECT SINGLE fdgrp FROM bseg
+*                 INTO v_fdgrv2
+*                 WHERE bukrs EQ bukrs AND
+*                       belnr EQ belnr AND
+*                       gjahr EQ gjahr AND
+*                       fdgrp NE ''.
 
-    DATA lt_bseg TYPE TABLE OF bseg.
+DATA: lt_bseg_x TYPE fagl_t_bseg.
 
-      CALL FUNCTION 'FAGL_GET_BSEG'
-        EXPORTING
-          i_bukrs = itab_with_item-bukrs
-          i_belnr = itab_with_item-belnr
-          i_gjahr = itab_with_item-gjahr
-        IMPORTING
-          et_bseg = lt_bseg
-        EXCEPTIONS
-          OTHERS  = 2.
+CALL FUNCTION 'FAGL_GET_BSEG'
+EXPORTING
+i_bukrs = bukrs
+i_belnr = belnr
+i_gjahr = gjahr
+IMPORTING
+et_bseg = lt_bseg_x
+EXCEPTIONS
+OTHERS = 2.
 
-      READ TABLE lt_bseg INTO DATA(ls_bseg) INDEX 1.
+DELETE lt_bseg_x WHERE fdgrp EQ ''.
 
-      IF sy-subrc EQ 0.
-        v_gsber = ls_bseg-gsber.
-      ENDIF.
+READ TABLE lt_bseg_x INTO DATA(wa_bseg_x) index 1.
 
+IF sy-subrc EQ 0.
+ v_fdgrv2 = wa_bseg_x-fdgrp.
+ENDIF.
 
-* <--- S4 Migration - 29/06/2023 - WS - Fim
+* <--- S4 Migration - 20/09/2023 - WS

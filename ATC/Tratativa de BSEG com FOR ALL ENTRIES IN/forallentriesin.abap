@@ -1,32 +1,35 @@
-**---> 25/07/2023 - Migração S4 - WS
+* <--- S4 Migration - 20/09/2023 - WS
 
-*        SELECT *
-*          FROM bseg
-*          INTO CORRESPONDING FIELDS OF TABLE lt_bseg
-*          FOR ALL ENTRIES IN lt_bsid
-*          WHERE bukrs =  lt_bsid-bukrs AND
-*                belnr =  lt_bsid-belnr AND
-*                gjahr =  lt_bsid-gjahr AND
-*                hkont IN  lr_hkont AND
-*                koart = 'D'.    "Se devuelve el asiento de Deudor
+*    SELECT bukrs belnr gjahr buzei bschl koart gsber mwskz dmbtr wrbtr
+*      saknr hkont lifnr  werks ebeln ebelp bupla ktosl fwbas sgtxt shkzg
+*      projk werks
+* INTO TABLE t_bseg
+* FROM bseg
+*  FOR ALL ENTRIES IN t_bkpf
+*WHERE bukrs  = t_bkpf-bukrs
+*  AND belnr  = t_bkpf-belnr
+*  AND gjahr  = t_bkpf-gjahr
+*  AND gsber IN s_gsber
+*  AND bupla IN s_bupla
+*  AND hkont IN r_hkont_aux.
 
       DATA lt_bseg_1 TYPE TABLE OF bseg.
 
         CALL FUNCTION 'FAGL_GET_BSEG_FOR_ALL_ENTRIES'
           EXPORTING
-            it_for_all_entries = lt_bsid
+            it_for_all_entries = t_bkpf
             i_where_clause     = |BUKRS = IT_FOR_ALL_ENTRIES-BUKRS AND BELNR = IT_FOR_ALL_ENTRIES-BELNR AND GJAHR = IT_FOR_ALL_ENTRIES-GJAHR|
           IMPORTING
             et_bseg            = lt_bseg_1
           EXCEPTIONS
             not_found          = 1.
 
-
         IF sy-subrc = 0 AND lines( lt_bseg_1 ) > 0.
-          DELETE lt_bseg_1 WHERE hkont NOT IN lr_hkont.
-          DELETE lt_bseg_1 WHERE koart NE 'D'.
+          DELETE lt_bseg_1 WHERE gsber NOT IN s_gsber.
+          DELETE lt_bseg_1 WHERE bupla NOT IN s_bupla.
+          DELETE lt_bseg_1 WHERE hkont NOT IN r_hkont_aux.
 
-          MOVE-CORRESPONDING lt_bseg_1[] TO lt_bseg[].
-        ENDIF.
+          MOVE-CORRESPONDING lt_bseg_1[] TO t_bseg[].
+        ENDIF.     
 
-**<--- 25/07/2023 - Migração S4 - WS
+* <--- S4 Migration - 20/09/2023 - WS  

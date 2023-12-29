@@ -43,4 +43,6 @@ VOFM
 BP
 SREPO
 STMS
+SIMGH
+SNRO
 + transações de cada módulo funcional caso precise verificar algum erro.

@@ -1,11 +1,22 @@
 "O Type-Conflict ocorre normalmente por diferença de tamanho de variáveis ou campos, resolvemos isso igualando o tamanho da variável do
 "nosso programa com o tamanho do parâmetro da função. 
 
-*******************************************
+******************************************************
 "Como tratar:
-"Mover valor do maior para o menor CONV() 
-"Mover valor do menor para o maior PRAGMA
-********************************************
+"para um campo MENOR usar o CONV.
+"para  um campo MAIOR usar PRAGMA.
+
+"40 = 18 = conv
+"18 = 40 = pragma
+
+"Ex:
+"po_item-material      = w_config_cte-matnr.
+"    18                                    40  CONV
+*******************************************************
+"po_item-material      = w_config_cte-matnr.
+"    35                                    40  CONV
+*******************************************************
+*******************************************************
 
 
 "Exemplo 1:

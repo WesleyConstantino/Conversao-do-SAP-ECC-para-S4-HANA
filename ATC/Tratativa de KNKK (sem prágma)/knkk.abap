@@ -1,37 +1,27 @@
-*--> 27/11/2023 - Migração S4 -WS
-*  SELECT *
-*    FROM knkk
-*    INTO TABLE t_knkk
-*     FOR ALL ENTRIES IN t_arq_aux
-*   WHERE kkber = p_kkber AND
-*         knkli = t_arq_aux-conta_credito.
+*---> S4 Migration - 18/07/2023 - JS
+*SELECT KUNNR KLIMK SKFOR CTLPC
+*INTO TABLE I_KNKK
+*FROM KNKK FOR ALL ENTRIES T_KNA1
+*WHERE KUNNR = T_KNA1-KUNNR
+*AND   KKBER = 'CR01'. 
 
+  DATA: lt_knkk       TYPE STANDARD TABLE OF knkk,  "#ECCI_USAGE_OK[2227014]
+        lt_data_where TYPE STANDARD TABLE OF zknkk_key,
+        wa_data_where TYPE zknkk_key. 
 
-        DATA: t_knkk_aux_68   TYPE STANDARD TABLE OF knkk, "#EC CI_USAGE_OK[2227014]'
-              t_data_where_68 TYPE STANDARD TABLE OF zstsd_knkk_key,
-              w_data_where_68 TYPE zstsd_knkk_key.
+  LOOP AT T_KNA1.
+   wa_data_where-kunnr = T_KNA1-KUNNR.
+   wa_data_where-kkber = 'CR01'.
+   APPEND wa_data_where TO lt_data_where.
+  ENDLOOP. 
 
-        LOOP AT t_arq_aux INTO DATA(w_for_all_54).
-          w_data_where_68-kunnr = w_for_all_54-CONTA_CREDITO.
-          APPEND w_data_where_68 TO t_data_where_68.
-        ENDLOOP.
+  CALL FUNCTION 'Z_FROM_TO_KNKK'
+    TABLES
+      t_data_where = lt_data_where
+      t_knkk       = lt_knkk. 
 
-        IF t_data_where_68 IS NOT INITIAL.
-          DELETE t_data_where_68 WHERE kkber NE p_kkber.
-        ENDIF.
+  if lt_knkk[] IS not INITIAL.
+    move-corresponding lt_knkk[] to I_KNKK[].
+  endif.
 
-        CALL FUNCTION 'ZFSD_SELECT_KNKK'
-          TABLES
-            t_data_where = t_data_where_68
-            t_knkk       = t_knkk_aux_68.
-
-        IF t_knkk_aux_68[] IS NOT INITIAL.
-
-          MOVE t_knkk_aux_68[] TO t_knkk[].
-          sy-dbcnt = lines( t_knkk_aux_68 ).
-          sy-subrc = 0.
-        ELSE.
-          sy-subrc = 4.
-          sy-dbcnt = 0.
-        ENDIF.
-*--> 27/11/2023 - Migração S4 -WS
+<--- S4 Migration - 18/07/2023 - JS

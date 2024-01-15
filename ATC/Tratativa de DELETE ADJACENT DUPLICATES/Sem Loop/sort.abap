@@ -1,4 +1,5 @@
 "Explicação: Sempre que tiver DELETE ADJACENT DUPLICATES, colocar um SORT como abaixo:
+"Nunca fazer SORT dentro de um LOOP.
 
  SELECT * INTO TABLE it_dre_c FROM zgl015_dre_est04.
       

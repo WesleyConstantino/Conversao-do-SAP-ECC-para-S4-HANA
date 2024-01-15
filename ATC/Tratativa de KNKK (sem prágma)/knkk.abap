@@ -24,4 +24,4 @@
     move-corresponding lt_knkk[] to I_KNKK[].
   endif.
 
-<--- S4 Migration - 18/07/2023 - JS
+*<--- S4 Migration - 18/07/2023 - JS

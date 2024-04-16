@@ -1,3 +1,4 @@
 "Objeto: Functionality not available: functional equivalent available
-"Problema: Função que deixou de existir.
-"Solução: Fazer uma função Z igual a da trilha quente e subistituir o nome da obsoleta para esta criada.
+
+"Problema: objeto que não deverá mais ser usardo.
+"Solução: trocar pelo objeto indicado na nota / ou indicado pelo time.

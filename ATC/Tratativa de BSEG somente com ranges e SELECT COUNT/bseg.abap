@@ -12,10 +12,6 @@
         APPEND ls_for_all_entries TO lt_for_all_entries.
         CLEAR: ls_for_all_entries.
 
-*Variável que guarda a option do range
-        DATA v_option TYPE c LENGTH 2.
-        v_option = s_belnr-option.
-
        ls_for_all_entries-belnr = s_belnr-high.
        APPEND ls_for_all_entries TO lt_for_all_entries.
        CLEAR: ls_for_all_entries.
@@ -42,7 +38,7 @@
         MOVE-CORRESPONDING lt_bseg[] TO gw_bseg[].
 *Faz a contagem de linhas "SELECT CONUT(*)"
         lv_count = LINES( gw_bseg ).
-        CLEAR: gw_bseg, lt_for_all_entries, v_option.
+        CLEAR: gw_bseg, lt_for_all_entries.
 
       ENDIF.
 *WS - UAT Mignow - MG-13754 - 29/05/24

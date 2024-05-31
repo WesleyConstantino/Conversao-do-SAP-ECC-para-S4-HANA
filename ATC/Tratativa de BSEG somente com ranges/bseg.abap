@@ -1,4 +1,5 @@
-      TYPES: BEGIN OF for_all_entries_type,
+"Types para entrar no For All Entries
+   TYPES: BEGIN OF for_all_entries_type,
                belnr TYPE bseg-belnr,
              END OF for_all_entries_type.
 
@@ -39,6 +40,7 @@
        DELETE lt_bseg WHERE belnr NOT IN s_belnr.
 
         MOVE-CORRESPONDING lt_bseg[] TO gw_bseg[].
+*Faz a contagem de linhas "SELECT CONUT(*)"
         lv_count = LINES( gw_bseg ).
         CLEAR: gw_bseg, lt_for_all_entries, v_option.
 

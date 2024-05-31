@@ -16,6 +16,19 @@
        APPEND ls_for_all_entries TO lt_for_all_entries.
        CLEAR: ls_for_all_entries.
 
+*Trata quando a option do range for BT
+       IF s_belnr-option EQ 'BT'.
+
+        DATA v_times TYPE c LENGTH 10.
+        v_times = s_belnr-high - s_belnr-low.
+        ls_for_all_entries-belnr = s_belnr-low.
+        DO v_times TIMES.
+          ls_for_all_entries-belnr = ls_for_all_entries-belnr + 1.
+          APPEND ls_for_all_entries TO lt_for_all_entries.
+        ENDDO.
+        CLEAR: ls_for_all_entries.
+       ENDIF.
+
        SORT lt_for_all_entries[].
        DELETE ADJACENT DUPLICATES FROM lt_for_all_entries[].
 

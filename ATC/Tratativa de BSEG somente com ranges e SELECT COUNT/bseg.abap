@@ -1,3 +1,11 @@
+*WS - UAT Mignow - MG-13754 - 29/05/24
+*    SELECT COUNT(*)
+*      FROM bseg
+*      INTO lv_count
+*     WHERE bukrs  IN s_bukrs
+*       AND gjahr  IN s_gjahr
+*       AND belnr  IN s_belnr.
+
 "Types para entrar no For All Entries
    TYPES: BEGIN OF for_all_entries_type,
                belnr TYPE bseg-belnr,

@@ -15,9 +15,6 @@
         APPEND ls_for_all_entries TO lt_for_all_entries.
         CLEAR: ls_for_all_entries.
 
-*Variável que guarda a option do range
-        v_option = s_belnr-option.
-
        ls_for_all_entries-belnr = s_belnr-high.
        APPEND ls_for_all_entries TO lt_for_all_entries.
        CLEAR: ls_for_all_entries.
@@ -58,6 +55,6 @@
         ENDDO.
       ENDIF.
 
-      CLEAR: gw_bseg, lt_for_all_entries, v_option.
+      CLEAR: gw_bseg, lt_for_all_entries.
 
 *---> S4 MIGRATION 03/04/2024 - MA

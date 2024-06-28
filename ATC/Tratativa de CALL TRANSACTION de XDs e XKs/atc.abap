@@ -1,3 +1,5 @@
+*A tratativa é a mesma para as transações obsoletas XK01, XK02, XK03, XD01, XD02 e XD03.
+
 * ---> S4 Migration - 02/04/2024 - FV
 *    CALL TRANSACTION 'XK02'
 *      USING gw_bdcdata

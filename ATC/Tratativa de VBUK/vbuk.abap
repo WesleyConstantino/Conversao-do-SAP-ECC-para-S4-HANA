@@ -38,3 +38,22 @@
       FROM V_vbuk_S4
       WHERE vbeln = @p_remessa.
 
+
+
+*******************************************************************
+"Exemplo 3:
+
+*WS - Migração Mignow - 03/07/24
+*  SELECT *
+*    FROM vbuk
+*    INTO TABLE it_vbuk
+*    FOR ALL ENTRIES IN it_vbak
+*    WHERE vbeln = it_vbak-vbeln.
+
+  SELECT *
+    FROM v_vbuk_S4
+    INTO CORRESPONDING FIELDS OF TABLE @it_vbuk
+    FOR ALL ENTRIES IN @it_vbak
+    WHERE vbeln = @it_vbak-vbeln.
+*WS - Migração Mignow - 03/07/24
+

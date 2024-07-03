@@ -8,8 +8,8 @@
 * AND buzei = t_partidas-buzei.
 * ENDSELECT.
 
-"Declara uma tabela interna com os types da tabela da bseg.
 DATA: lt_bseg TYPE fagl_t_bseg.
+
 "Chama a função colocando os campos do exporting tal como os do where
  dentro do select e a tabela interna criada como de saída.
 CALL FUNCTION 'FAGL_GET_BSEG'
@@ -22,9 +22,7 @@ IMPORTING
 et_bseg = lt_bseg
 EXCEPTIONS
 OTHERS = 2.
-"Como só tem uma linha, faz um read table da tabela interna
- para uma work area declarada na linha com index 1 e depois
-  move os dados correspondentes da linha para a tabela do INTO TABLE.
+
 READ TABLE lt_bseg INTO DATA(wa_bseg) index 1.
 IF sy-subrc EQ 0.
 t_partidas-zbd1t = wa_bseg-zbd1t.

@@ -10,8 +10,6 @@
 
 DATA: lt_bseg TYPE fagl_t_bseg.
 
-"Chama a função colocando os campos do exporting tal como os do where
- dentro do select e a tabela interna criada como de saída.
 CALL FUNCTION 'FAGL_GET_BSEG'
 EXPORTING
 i_bukrs = t_partidas-bukrs

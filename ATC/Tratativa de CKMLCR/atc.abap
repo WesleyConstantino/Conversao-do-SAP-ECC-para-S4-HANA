@@ -1,3 +1,30 @@
+
+*Forma nova (substituir pela CDS View ZCDSML_TOT): .............................................................
+
+WS - Migração Mignow - 03/07/24
+*      SELECT SINGLE stprs stprs
+*        INTO (vl_pvprs, vl_stprs)
+*        FROM ckmlcr
+*        WHERE kalnr = vl_kaln1 AND
+*              bdatj = vl_bdatj AND
+*              poper = vl_poper AND
+*              untper = 0 AND
+*              curtp = '40'.
+
+      SELECT SINGLE stprs stprs
+        INTO (vl_pvprs, vl_stprs)
+        FROM ZCDSML_TOT
+        WHERE kalnr = vl_kaln1 AND
+              bdatj = vl_bdatj AND
+              poper = vl_poper AND
+              untper = 0 AND
+              curtp = '40'.
+*WS - Migração Mignow - 03/07/24
+
+
+
+*Forma antiga: .............................................................................................
+
 *---> 212/09/2023 - Migração S4 - FTM
   DATA: t_kalnr_s4  TYPE ckmv0_matobj_tbl,
         t_ckmlcr_s4 TYPE TABLE OF ckmlcr.

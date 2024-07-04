@@ -1,3 +1,9 @@
+*---> 212/09/2023 - Migração S4 - FTM
+  DATA: t_kalnr_s4  TYPE ckmv0_matobj_tbl,
+        t_ckmlcr_s4 TYPE TABLE OF ckmlcr.
+*<--- 22/09/2023 - Migração S4 - FTM
+
+
 *---> 22/09/2023 - Migração S4 - FTM
 * SELECT SINGLE kalnr bdatj poper curtp peinh stprs pvprs
 * FROM ckmlcr INTO wa_ckmlcr

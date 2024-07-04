@@ -1,7 +1,7 @@
 
 *Forma nova (substituir pela CDS View ZCDSML_TOT): .............................................................
 
-WS - Migração Mignow - 03/07/24
+*WS - Migração Mignow - 03/07/24
 *      SELECT SINGLE stprs stprs
 *        INTO (vl_pvprs, vl_stprs)
 *        FROM ckmlcr

@@ -1,0 +1,26 @@
+"Substituir o select da tabela VBUP por V_VBUP_CDS ou V_VBUP_S4 ou LIPS.
+
+*......................................................................*
+*Exemplo 1:
+
+*---> MIG-NOW AUTOMATION - S4 MIGRATION – BEGIN
+*SELECT * FROM vbup WHERE vbeln EQ belnr.
+
+SELECT FROM V_VBUP_S4 FIELDS * 
+WHERE VBELN EQ @BELNR 
+INTO CORRESPONDING FIELDS OF @VBUP .
+*<--- MIG-NOW AUTOMATION - S4 MIGRATION – END
+
+
+*......................................................................*
+*Exemplo 2:
+*WS - Migração Mignow - 03/07/24
+*        SELECT SINGLE * FROM vbup
+*          WHERE vbeln =  t_zkfbc_nfe_rec_d-docnr AND
+*                gbsta = 'A'.
+
+        SELECT SINGLE * FROM V_VBUP_CDS
+          INTO @DATA(T_VBUP_CDS)
+          WHERE vbeln =	@t_zkfbc_nfe_rec_d-docnr AND
+                gbsta = 'A'.
+*WS - Migração Mignow - 03/07/24

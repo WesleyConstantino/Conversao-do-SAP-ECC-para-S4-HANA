@@ -73,3 +73,23 @@
     MOVE-CORRESPONDING lt_mt61d[] TO t_mdkp[].
   ENDIF.
 *<--- 27/02/2024 - Migração S4 – BM
+
+
+*Exemplo 3 ...................................................................................*
+"Usar esta exemplo para os casos em que a MARC possuir todos os campos selecionados no select.
+
+*---> 10/11/2023 - Migração S4 – DG
+*       SELECT SINGLE dismm
+*         FROM mdkp
+*         INTO v_dismm_0182
+*         WHERE matnr = mdba-matnr AND
+*               plwrk = mdba-werks.
+
+       SELECT SINGLE dismm
+         FROM marc
+         INTO v_dismm_0182
+         WHERE matnr = mdba-matnr AND
+               werks = mdba-werks.
+
+*<--- 10/11/2023 - Migração S4 – DG
+

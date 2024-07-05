@@ -1,3 +1,6 @@
+
+*Exemplo 1 ...................................................................................*
+
 *WS - Migração Mignow - 03/07/24
 *  SELECT dtart
 *         matnr
@@ -36,3 +39,31 @@
 
   ENDIF.
 *WS - Migração Mignow - 03/07/24
+
+
+*Exemplo 2 ...................................................................................*
+
+*---> 27/02/2024 - Migração S4 – BM
+*  SELECT *
+*    INTO TABLE t_mdkp
+*    FROM mdkp
+*   WHERE
+*      dtart EQ c_md
+*  AND matnr IN s_matnr
+*  AND plwrk EQ p_plwrk
+*  AND plscn EQ 000.
+  SELECT * FROM marc INTO TABLE @DATA(lt_marc)
+    WHERE matnr IN @s_matnr
+      AND werks EQ @p_plwrk.
+  IF lt_marc[] IS NOT INITIAL.
+    DATA: lt_matnr_werks TYPE pph_matnr_werks_berid_tab,
+          lt_mt61d       TYPE pph_mt61d_tab.
+    lt_matnr_werks = VALUE #( FOR wa IN lt_marc ( matnr = wa-matnr werks = wa-werks ) ).
+    CALL FUNCTION 'MD_MDPSX_READ_API'
+      EXPORTING
+        it_matnr_werks_berid = lt_matnr_werks
+      IMPORTING
+        et_mt61d             = lt_mt61d.
+    MOVE-CORRESPONDING lt_mt61d[] TO t_mdkp[].
+  ENDIF.
+*<--- 27/02/2024 - Migração S4 – BM

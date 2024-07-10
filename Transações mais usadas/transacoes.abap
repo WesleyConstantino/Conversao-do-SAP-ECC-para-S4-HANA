@@ -5,3 +5,5 @@
 "SPDD - Transação da SPDD.
 "SU01 - Alterar/Resetar senhas de usuários SAP (Apenas com perfil de altorizados para fazer isso).
 "SM12 - Transação sap para tirar bloqueio de edição em objeto por usuário.
+"FLETS - transação  para verificação do tamanho do campo da MATNR em um cliente.
+"OMSL - transação  para verificação do tamanho do campo da MATNR em um cliente.

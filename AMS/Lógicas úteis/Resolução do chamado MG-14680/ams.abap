@@ -5,18 +5,24 @@ FORM zf_corrige_campo_desc_confir.
 
 T_SAIDA_AUX TYPE TABLE OF Y_SAIDA.
 
+"Move os dados da tabela T_SAIDA para a T_SAIDA_AUX.
 T_SAIDA_AUX[] = CORRESPONDING #( T_SAIDA[] ).
+
 REFRESH T_SAIDA.
 
 LOOP A T_SAIDA_AUX INTO DATA(W_SAIDA_AUX).
 
+"Pega a descrição correta do campo MAKTX.
  SELECT MAKTX
  FROM MAKT
  INTO @DATA(V_MAKTX)
  WHERE MATNR EQ ITEM_MATNR AND
        SPRAS EQ SY-LANGU.
 
+"Limpa a descrição errada do campo DESC_CONFIR.
  CLEAR W_SAIDA_AUX-DESC_CONFIR.
+
+"Passa a descrição correta para o campo DESC_CONFI.
  W_SAIDA_AUX-DESC_CONFIR = V_MAKTX. 
 
  APPEND W_SAIDA_AUX TO T_SAIDA.

@@ -1,6 +1,10 @@
+*<--- 17/07/2024 - MG-14680  - UAT Mignow - WS * Início
 PERFORM zf_corrige_campo_desc_confir.
+*<--- 17/07/2024 - MG-14680  - UAT Mignow - WS * Fim
 
+"...
 
+*<--- 17/07/2024 - MG-14680  - UAT Mignow - WS * Início
 FORM zf_corrige_campo_desc_confir.
 
 T_SAIDA_AUX TYPE TABLE OF Y_SAIDA.
@@ -31,3 +35,4 @@ LOOP A T_SAIDA_AUX INTO DATA(W_SAIDA_AUX).
 ENDLOOP.
 
 ENDFORM.
+*<--- 17/07/2024 - MG-14680  - UAT Mignow - WS * Fim

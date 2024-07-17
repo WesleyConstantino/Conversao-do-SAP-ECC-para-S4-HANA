@@ -11,7 +11,8 @@ FORM zf_corrige_campo_desc_confir.
 T_SAIDA_AUX TYPE TABLE OF Y_SAIDA.
 
 "Move os dados da tabela T_SAIDA para a T_SAIDA_AUX.
-T_SAIDA_AUX = CORRESPONDING #( T_SAIDA ).
+"T_SAIDA_AUX = CORRESPONDING #( T_SAIDA ).
+T_SAIDA_AUX[] =  T_SAIDA[].
 
 REFRESH T_SAIDA.
 

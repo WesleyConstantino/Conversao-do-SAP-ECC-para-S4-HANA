@@ -153,7 +153,7 @@ LOOP AT t_saida ASSIGNING FIELD-SYMBOL(<fs_saida>).
  fs_saida-ITEM_CONFIR = v_zeros && fs_saida-ITEM_CONFIR. 
 
 "Passa o valor convertido para a linha
- t_matnr-matnr = fs_saida-ITEM_CONFIR.
+ t_matnr-matnr = CONV #( fs_saida-ITEM_CONFIR ).
 
 "Apenda na tabela
  APPEND t_matnr.

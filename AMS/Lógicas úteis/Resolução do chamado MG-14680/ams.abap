@@ -112,16 +112,16 @@ PERFORM zf_trata_matnr.
 
 IF t_matnr IS NOT INITIAL.
 
-SORT t_matnr WITH KEY matnr.
-DELETE ADJACENT DUPLICATES t_matnr BY matnr.
+SORT t_matnr BY matnr.
+DELETE ADJACENT DUPLICATES FROM t_matnr COMPARING matnr.
 
   SELECT matnr,
          maktx
     FROM makt
     INTO TABLE @DATA(t_makt)
-     FOR ALL ENTRIES IN t_matnr
-   WHERE matnr EQ t_matnr-matnr
-     AND spras EQ sy-langu.
+     FOR ALL ENTRIES IN @t_matnr
+   WHERE matnr EQ @t_matnr-matnr
+     AND spras EQ @sy-langu.
 
   LOOP AT t_saida ASSIGNING FIELD-SYMBOL(<fs_saida>).
     <fs_saida>-desc_confir = VALUE #( t_makt[ matnr = <fs_saida>-ITEM_CONFIR ]-maktx OPTIONAL ).
@@ -142,29 +142,31 @@ ENDFORM.
 *<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Início
 FORM zf_trata_matnr.
 
+DATA v_zeros(40) TYPE c.
+
 LOOP AT t_saida ASSIGNING FIELD-SYMBOL(<fs_saida>).
- 
+
 "Remove zeros à esquerda
- SHIFT fs_saida-ITEM_CONFIR LEFT DELETING LEADING '0'. 
+ SHIFT <fs_saida>-ITEM_CONFIR LEFT DELETING LEADING '0'.
 
 "Faz a contagem de quantos zeros deverão ser adicionados
- DATA(v_times) = strlen( fs_saida-ITEM_CONFIR ).
+ DATA(v_times) = strlen( <fs_saida>-ITEM_CONFIR ).
  v_times = '18' - v_times.
 
 "Adiciona os zeros
  DO v_times TIMES.
-   CONCATENATE DATA(v_zeros) '0' INTO v_zeros.
+   CONCATENATE v_zeros '0' INTO v_zeros.
  ENDDO.
 
 "Concatena os zeros e o matnr
- fs_saida-ITEM_CONFIR = v_zeros && fs_saida-ITEM_CONFIR. 
+ <fs_saida>-ITEM_CONFIR = v_zeros && <fs_saida>-ITEM_CONFIR.
 
 "Passa o valor convertido para a linha
- t_matnr-matnr = CONV #( fs_saida-ITEM_CONFIR ).
+ t_matnr-matnr = CONV #( <fs_saida>-ITEM_CONFIR ).
 
 "Apenda na tabela
  APPEND t_matnr.
- CLEAR v_matnr.
+ CLEAR v_zeros.
 
 ENDLOOP.
 

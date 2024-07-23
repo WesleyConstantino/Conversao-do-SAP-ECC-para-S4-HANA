@@ -73,3 +73,81 @@ FORM zf_corrige_campo_desc_confir.
 ENDFORM.
 *<--- 17/07/2024 - MG-14680  - UAT Mignow - WS * Fim
 
+
+
+*****************Exemplo performatico atualizado:*****************
+
+
+***Declarações globais:
+*<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Início
+*Types
+TYPES: BEGIN OF ty_matnr,
+         matnr TYPE c LENGTH 18, 
+       END OF ty_matnr.
+
+*Tabelas e Workareas
+DATA t_matnr TYPE TABLE OF ty_matnr WITH HEADER LINE.
+*<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Fim
+
+
+"...
+
+
+*<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Início
+PERFORM zf_corrige_campo_desc_confir.
+*<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Fim
+
+
+"...
+
+
+*<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Início
+FORM zf_corrige_campo_desc_confir.
+
+"Converte o campo matnr para a seleção da makt
+PERFORM zf_trata_matnr.
+
+  SELECT matnr,
+         maktx
+    FROM makt
+    INTO TABLE @DATA(t_makt)
+     FOR ALL ENTRIES IN t_matnr
+   WHERE matnr EQ t_matnr-matnr
+     AND spras EQ sy-langu.
+
+  LOOP AT t_saida ASSIGNING FIELD-SYMBOL(<fs_saida>).
+    <fs_saida>-desc_confir = VALUE #( t_makt[ matnr = <fs_saida>-ITEM_CONFIR ]-maktx OPTIONAL ).
+  ENDLOOP.
+
+ENDFORM.
+*<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Fim
+
+"...
+
+
+*<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Início
+FORM zf_trata_matnr.
+
+LOOP AT t_saida ASSIGNING FIELD-SYMBOL(<fs_saida>).
+ 
+"Remove zeros à esquerda
+ SHIFT fs_saida-ITEM_CONFIR LEFT DELETING LEADING '0'. 
+
+ DATA(v_times) = strlen( fs_saida-ITEM_CONFIR ).
+ v_times = '18' - v_times.
+
+"Adiciona zeros
+ DO v_times TIMES.
+   CONCATENATE DATA(v_zeros) '0' INTO v_zeros.
+ ENDDO.
+
+ fs_saida-ITEM_CONFIR = v_zeros && fs_saida-ITEM_CONFIR. 
+ 
+ t_matnr-matnr = fs_saida-ITEM_CONFIR.
+
+ APPEND t_matnr.
+ CLEAR matnr.
+ENDLOOP.
+
+ENDFORM.
+*<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Fim

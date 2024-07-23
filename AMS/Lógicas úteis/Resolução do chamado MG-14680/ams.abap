@@ -110,6 +110,11 @@ FORM zf_corrige_campo_desc_confir.
 "Converte o campo matnr para a seleção da makt
 PERFORM zf_trata_matnr.
 
+IF t_matnr IS NOT INITIAL.
+
+SORT t_matnr WITH KEY matnr.
+DELETE ADJACENT DUPLICATES t_matnr BY matnr.
+
   SELECT matnr,
          maktx
     FROM makt
@@ -124,6 +129,8 @@ PERFORM zf_trata_matnr.
       MODIFY t_saida FROM <fs_saida>.
     ENDIF.
   ENDLOOP.
+
+ENDIF.
 
 ENDFORM.
 *<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Fim

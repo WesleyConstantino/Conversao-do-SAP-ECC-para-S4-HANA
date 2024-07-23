@@ -120,6 +120,9 @@ PERFORM zf_trata_matnr.
 
   LOOP AT t_saida ASSIGNING FIELD-SYMBOL(<fs_saida>).
     <fs_saida>-desc_confir = VALUE #( t_makt[ matnr = <fs_saida>-ITEM_CONFIR ]-maktx OPTIONAL ).
+    IF sy-subrc is initial.
+      MODIFY t_saida FROM <fs_saida>.
+    ENDIF.
   ENDLOOP.
 
 ENDFORM.

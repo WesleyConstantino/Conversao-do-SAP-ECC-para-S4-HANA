@@ -85,7 +85,7 @@ ENDFORM.
 *<--- 23/07/2024 - MG-14680  - UAT Mignow - WS * Início
 *Types
 TYPES: BEGIN OF ty_matnr,
-         matnr TYPE c LENGTH 18, 
+         matnr TYPE c LENGTH 40,
        END OF ty_matnr.
 
 *Tabelas e Workareas

@@ -133,20 +133,25 @@ LOOP AT t_saida ASSIGNING FIELD-SYMBOL(<fs_saida>).
 "Remove zeros à esquerda
  SHIFT fs_saida-ITEM_CONFIR LEFT DELETING LEADING '0'. 
 
+"Faz a contagem de quantos zeros deverão ser adicionados
  DATA(v_times) = strlen( fs_saida-ITEM_CONFIR ).
  v_times = '18' - v_times.
 
-"Adiciona zeros
+"Adiciona os zeros
  DO v_times TIMES.
    CONCATENATE DATA(v_zeros) '0' INTO v_zeros.
  ENDDO.
 
+"Concatena os zeros e o matnr
  fs_saida-ITEM_CONFIR = v_zeros && fs_saida-ITEM_CONFIR. 
- 
+
+"Passa o valor convertido para a linha
  t_matnr-matnr = fs_saida-ITEM_CONFIR.
 
+"Apenda na tabela
  APPEND t_matnr.
- CLEAR matnr.
+ CLEAR v_matnr.
+
 ENDLOOP.
 
 ENDFORM.

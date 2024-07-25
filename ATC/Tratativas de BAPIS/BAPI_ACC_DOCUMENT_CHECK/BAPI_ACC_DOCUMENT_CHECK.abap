@@ -2,6 +2,7 @@
 "for passado algum valor para a tabela que alimentará o parâmetro "currencyamount" da BAPI.
 *****************************************************************************************************************************************************************
 
+*OBS: antigamente era feito um CONV como abaixo. Hoje em dia não é mais necessário. Tratamos esse erro somente com prágma.
 * ---> S4 Migration - 26/07/2023 - WS - Inicio
       currencyamount-itemno_acc = CONV #( item_pos ).
       currencyamount-currency = CONV #( es_esquemas-cod_moneda ).

@@ -17,3 +17,7 @@
           accountgl      = accountgl
           currencyamount = currencyamount
           return         = return.
+
+
+*OBS: em caso de dois tipos de erros diferentes em 1 programa apontando para a mesma bapi. Usar os prágmas descritos nos dois erros e colocar os prágmas
+"um debaixo do outro.

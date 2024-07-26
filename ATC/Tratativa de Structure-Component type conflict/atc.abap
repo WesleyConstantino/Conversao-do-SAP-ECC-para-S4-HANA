@@ -58,8 +58,7 @@ CALL FUNCTION 'BAPI_DOCUMENT_GETLATEST2'
 *   WHEREUSEDLISTS             =
           .
 
-Passo 4: fora da chamada da função, passei o valor da estrutura auxiliar para a 
-estrutura principal:
+"Passo 4: fora da chamada da função, passei o valor da estrutura auxiliar para a estrutura principal:
 *WS - Migração Mignow - 25/07/24
   lt_docstruct = CORRESPONDING #( lt_docstruct_aux ).
 *WS - Migração Mignow - 25/07/24

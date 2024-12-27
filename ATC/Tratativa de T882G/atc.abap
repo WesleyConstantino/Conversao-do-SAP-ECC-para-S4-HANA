@@ -5,6 +5,9 @@
 *          WHERE rbukrs = gs_zscrelacngl-bukrs
 *          AND rldnr = gs_zscrelacngl-rldnr.
 
+  TYPES:
+    tt_t882g TYPE STANDARD TABLE OF t882g WITH KEY rbukrs rldnr .
+
   DATA:
     lt_rbukrs    TYPE fagl_bukrs_tab,
     lt_rldnr_mf  TYPE FAGL_RLDNR_tab,

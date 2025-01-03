@@ -57,7 +57,7 @@
 
 *Exemplo 2:
 
-<---03/01/2025 - Migração S4 - WS
+*<---03/01/2025 - Migração S4 - WS
 *  select * from mlcd into table lt_mlcd
 *    where kalnr = v_kalnr
 *    and bdatj   = lh_bdatj

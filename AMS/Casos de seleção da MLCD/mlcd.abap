@@ -11,6 +11,7 @@
 
      CONCATENATE ano periodo INTO DATA(lv_ano_e_periodo).
 
+     "Condição para O ECC:
      IF lv_tvarv_data <= lv_ano_e_periodo.
 *---> TICKETS - 29/07/2025 -MG-25825 - WS - End
 
@@ -29,6 +30,7 @@
           AND a~curtp = '10'
           AND c~spras = sy-langu.
 *---> TICKETS - 29/07/2025 -MG-25825 - WS - Begin
+     "Condição para O S/4:
      ELSE.
 
       DATA: lt_mlcd1  TYPE ckmcd_t_mlcd,

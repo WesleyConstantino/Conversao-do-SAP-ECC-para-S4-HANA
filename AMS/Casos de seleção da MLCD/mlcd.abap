@@ -4,6 +4,7 @@
 
 *Exemplo de solução: use a transação STVARV para criar um parâmetro com o período desejado e use-o como condição:
 *---> TICKETS - 29/07/2025 -MG-25825 - WS - Begin
+     "Seleciona o parâmetro que criei na transação STVARV:
      SELECT SINGLE low
        FROM tvarvc
        INTO @DATA(lv_tvarv_data)
